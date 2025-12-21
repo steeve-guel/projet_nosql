@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+        <h1>Ajouter une nouvelle classe</h1>
+
+        <form method="POST" action="/add_classe">
+
+            <label for="code">Code:</label>
+            <input type="text" id="code" name="code" required><br><br>
+
+            <label for="nom">Nom de la classe:</label>
+            <input type="text" id="nom" name="nom" required><br><br>
+
+            <label for="niveau">Niveau:</label>
+            <input type="text" id="niveau" name="niveau" required><br><br>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea><br><br>
+
+            <input type="submit" value="Ajouter la classe">
+        </form>
+    </section>
+</body>
+</html>

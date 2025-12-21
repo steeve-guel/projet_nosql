@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section>
+        <h1>Liste des étudiants</h1>
+
+        <ul>
+            {% for e in etudiants %}
+            <li>
+                {{ e.nom }} {{ e.prenom }} —
+                {{ e.classe[0].nom if e.classe else "Aucune classe" }}
+            </li>
+            {% endfor %}
+        </ul>
+
+        <a href="/add_etudiant">Ajouter un étudiant</a>
+    </section>
+</body>
+
+</html>

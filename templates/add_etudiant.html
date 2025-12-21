@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section>
+        <h1>Création d'un étudiant</h1>
+
+        <form method="POST">
+
+            <div>
+                <label>Nom</label><br>
+                <input type="text" name="nom" required>
+            </div>
+
+            <br>
+
+            <div>
+                <label>Prénom</label><br>
+                <input type="text" name="prenom" required>
+            </div>
+
+            <br>
+
+            <div>
+                <label>Âge</label><br>
+                <input type="number" name="age" min="1" required>
+            </div>
+
+            <br>
+
+            <div>
+                <label>Classe</label><br>
+                <select name="classe_id" required>
+                    <option value="">-- Choisir une classe --</option>
+                    {% for classe in classes %}
+                    <option value="{{ classe._id }}">
+                        {{ classe.nom }} ({{ classe.niveau }})
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <br>
+
+            <button type="submit">Créer l'étudiant</button>
+        </form>
+
+        <br>
+        <a href="/etudiants">Voir les étudiants</a>
+    </section>
+</body>
+
+</html>
