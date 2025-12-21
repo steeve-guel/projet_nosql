@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+        <h1>Resultat de la recherche</h1>
+        <ul>
+            {% for eleve in search %}
+                <li>{{ eleve.nom }} {{ eleve.prenom }}, Age : {{ eleve.age }}</li>
+            {% endfor %}
+        </ul>
+
+        <h1>Liste des élèves</h1>
+        <p>
+            {% for eleve in eleves %}
+                Élève : {{ eleve.prenom }} {{ eleve.nom }} a {{ eleve.age }} ans.<br>
+            {% endfor %}
+        </p>
+
+        <p>Total des eleves : {{eleves | length}}</p>
+    </section>
+</body>
+</html>
