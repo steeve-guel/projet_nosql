@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Etudiant</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bulma/css/bulma.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='materialize/css/materialize.min.css') }}">
@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
     <header>
         <!-- Navigation Bar -->
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -151,68 +150,13 @@
         <!----------------------------->
     </header>
 
-    <main class="container">
-        <section>
-            <div class="has-text-centered">
-                <h1>Liste des étudiants</h1>
-                <p>Consulter la liste des étudiants inscrits dans le système.</p>
-            </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Age</th>
-                        <th>Classe</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for e in etudiants %}
-                    <tr>
-                        <td>{{ e.nom }}</td>
-                        <td>{{ e.prenom }}</td>
-                        <td>{{ e.age }} ans</td>
-                        <td class="is-info">{{ e.classe[0].nom if e.classe else "Aucune classe" }}</td>
-                        <td> <a href="/etudiants/{{ e._id }}/show">Voir</a> | <a
-                                href="/etudiants/{{ e._id }}/edit">Modifier</a> | <a
-                                href="/etudiants/{{ e._id }}/delete">Supprimer</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </section>
-
-        <section class="fixed-grid mt-5">
-            <div class="grid has-auto-count">
-                {% for e in etudiants %}
-                    {% set initiales = e.nom[0] + e.prenom[0] %}
-                <div class="cell">
-                    <div class="student-card">
-                        <div class="student-content">
-                            <div>
-                                <p class="student-photo-profil">{{ initiales }}</p>
-                            </div>
-
-                            <div class="student-info">
-                                <h3 class="student-name">{{e.nom}} {{e.prenom}}</h3>
-                                <p class="student-class-badge">Classe: {{e.classe[0].nom if e.classe else "Aucune classe"}}
-                                </p>
-                                <p class="student-age">Âge: {{e.age}} ans</p>
-                            </div>
-
-                            <div class="student-action">
-                                <a href="/etudiants/{{ e._id }}/show" class="btn-view p-2">Voir le profil</a>
-                                <a href="/etudiants/{{ e._id }}/edit" class="btn-edit p-2">Modifier</a>
-                                <a href="/etudiants/{{ e._id }}/delete" class="btn-delete p-2">Supprimer</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-
-            </div>
-        </section>
+    <main>
+        <h1>Détails de l'étudiant</h1>
+        <p><strong>Nom:</strong> {{ etudiant.nom }}</p>
+        <p><strong>Prénom:</strong> {{ etudiant.prenom }}</p>
+        <p><strong>Âge:</strong> {{ etudiant.age }} ans</p>
+        <p><strong>Classe:</strong> {{ etudiant.classe[0].nom if etudiant.classe else "Aucune classe" }}</p>
+        <a href="/etudiants">Retour à la liste des étudiants</a>
     </main>
 </body>
 

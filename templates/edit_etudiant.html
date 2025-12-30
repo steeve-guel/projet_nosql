@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modification - Etudiant</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h1>Modifier les informations de l'étudiant</h1>
+            <form action="" method="post">
+                <label for="nom">Nom:</label>
+                <input type="text" id="nom" name="nom" value="{{ etudiant.nom }}" required><br><br>
+
+                <label for="prenom">Prénom:</label>
+                <input type="text" id="prenom" name="prenom" value="{{ etudiant.prenom }}" required><br><br>
+
+                <label for="age">Âge:</label>
+                <input type="number" id="age" name="age" value="{{ etudiant.age }}" required><br><br>
+
+                <label for="classe">Classe:</label>
+                <select id="classe" name="classe" required>
+                    {% for classe in classes %}
+                        <option value="{{ classe._id }}" {% if etudiant.classe and etudiant.classe[0]._id == classe._id %}selected{% endif %}> {{ classe.nom }}</option>
+                    {% endfor %}
+                </select><br><br>
+
+                <button type="submit" value="Mettre à jour">Mettre à jour</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

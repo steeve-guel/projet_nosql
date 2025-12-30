@@ -50,7 +50,10 @@ db,client = connect_db()
 def home():
     return render_template('index.html')
 
-
+#Classe routes
+#######
+###
+#######
 @app.route('/add_classe', methods=['GET', 'POST'])
 def add_classe():
     if request.method == 'POST':
@@ -74,6 +77,10 @@ def list_classes():
     classes = list(db.classes.find())
     return render_template('classes.html', classes=classes)
 
+#Etudiant routes
+########################---------------------------------------------------------------------------------------------
+###
+#######
 @app.route('/add_etudiant', methods=['GET', 'POST'])
 def add_etudiant():
     classes = list(db.classes.find())
@@ -130,6 +137,71 @@ def list_etudiants():
         etudiants=etudiants
     )
 
+@app.route("/etudiants/<etudiant_id>/delete", methods=['POST','GET'])
+def delete_etudiant(etudiant_id):
+    result = db.etudiants.delete_one({"_id": ObjectId(etudiant_id)})
+    if result.deleted_count == 0:
+        abort(404, "Étudiant non trouvé")
+    return redirect(url_for("list_etudiants"))
+
+@app.route("/etudiants/<etudiant_id>/show")
+def show_etudiant(etudiant_id):
+    etudiant = list(db.etudiants.aggregate([
+        {"$match": {"_id": ObjectId(etudiant_id)}},
+        {
+            "$lookup": {
+                "from": "classes",
+                "localField": "classe_id",
+                "foreignField": "_id",
+                "as": "classe"
+            }
+        }
+    ]))
+    if not etudiant:
+        abort(404, "Étudiant non trouvé")
+    return render_template("show_etudiant.html", etudiant=etudiant[0])
+
+@app.route("/etudiants/<etudiant_id>/edit", methods=['GET', 'POST'])
+def edit_etudiant(etudiant_id):
+    etudiant = db.etudiants.find_one({"_id": ObjectId(etudiant_id)})
+    if not etudiant:
+        abort(404, "Étudiant non trouvé")
+
+    classes = list(db.classes.find())
+
+    if request.method == 'POST':
+        nom = request.form.get('nom')
+        prenom = request.form.get('prenom')
+        age = int(request.form.get('age'))
+        classe_id = request.form.get('classe')
+
+        print(f"Classe ID reçue: {classe_id}")
+
+        if not classe_id:
+            abort(400, "Classe obligatoire")
+
+        classe = db.classes.find_one(
+            {"_id": ObjectId(classe_id)}
+        )
+
+        if not classe:
+            abort(400, "Classe invalide")
+
+        updated_etudiant = {
+            "nom": nom,
+            "prenom": prenom,
+            "age": age,
+            "classe_id": ObjectId(classe_id)
+        }
+
+        result = db.etudiants.update_one(
+            {"_id": ObjectId(etudiant_id)},
+            {"$set": updated_etudiant}
+        )
+
+        return redirect(url_for("list_etudiants"))
+
+    return render_template("edit_etudiant.html", etudiant=etudiant, classes=classes)
 
 if __name__ == '__main__':
     app.run(debug=True)
