@@ -5,7 +5,7 @@ from pymongo.errors import ConnectionFailure, ServerSelectionTimeoutError
 import os
 from config import Config
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder='static', template_folder='templates',static_url_path='/static')
 app.config.from_object(Config)
 
 def connect_db():
@@ -48,7 +48,7 @@ db,client = connect_db()
 
 @app.route('/')
 def home():
-    return "Bienvenue dans l'application de gestion des étudiants!"
+    return render_template('index.html')
 
 
 @app.route('/add_classe', methods=['GET', 'POST'])

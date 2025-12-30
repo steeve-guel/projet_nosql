@@ -4,56 +4,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Etudiants</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bulma/css/bulma.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='materialize/css/materialize.min.css') }}">
+    <script src="{{ url_for('static', filename='materialize/js/materialize.min.js') }}"></script>
 </head>
 
 <body>
-    <section>
-        <h1>Création d'un étudiant</h1>
 
-        <form method="POST">
 
-            <div>
-                <label>Nom</label><br>
-                <input type="text" name="nom" required>
+    <!-- Navigation Bar -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 508 508" xml:space="preserve" width="64px"
+                    height="64px" fill="#000000">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <circle style="fill:#324A5E;" cx="254" cy="254" r="254"></circle>
+                        <path style="fill:#2B3B4E;" d="M78,436.8c45.6,44,107.6,71.2,176,71.2s130.4-27.2,176-71.2H78z">
+                        </path>
+                        <g>
+                            <rect x="300" y="210.4" style="fill:#FFFFFF;" width="8.4" height="78.8"></rect>
+                            <rect x="218.8" y="210.4" style="fill:#FFFFFF;" width="8.4" height="78.8"></rect>
+                        </g>
+                        <g>
+                            <rect x="300" y="210.4" style="fill:#E6E9EE;" width="8.4" height="29.6"></rect>
+                            <rect x="218.8" y="210.4" style="fill:#E6E9EE;" width="8.4" height="29.6"></rect>
+                        </g>
+                        <path style="fill:#FFFFFF;"
+                            d="M148.8,262v-79.2h-8.4V262c0,17.2,14,31.6,31.6,31.6h25.6v-8.4H172 C159.2,284.8,148.8,274.8,148.8,262z">
+                        </path>
+                        <rect x="140.8" y="182.8" style="fill:#E6E9EE;" width="8.4" height="15.6"></rect>
+                        <g>
+                            <polygon style="fill:#FFFFFF;" points="348,432.4 325.6,293.2 310.8,293.2 333.6,432.4 ">
+                            </polygon>
+                            <polygon style="fill:#FFFFFF;" points="194,432.4 216.4,293.2 202,293.2 179.2,432.4 ">
+                            </polygon>
+                        </g>
+                        <g>
+                            <polygon style="fill:#E6E9EE;" points="328.8,313.6 325.6,293.2 310.8,293.2 314.4,313.6 ">
+                            </polygon>
+                            <polygon style="fill:#E6E9EE;" points="213.2,313.6 216.4,293.2 202,293.2 198.4,313.6 ">
+                            </polygon>
+                        </g>
+                        <g>
+                            <path style="fill:#54C0EB;"
+                                d="M351.2,302.8H176c-2.8,0-5.2-2.4-5.2-5.2v-16.4c0-2.8,2.4-5.2,5.2-5.2h174.8c2.8,0,5.2,2.4,5.2,5.2 v16.4C356.4,300.4,354,302.8,351.2,302.8z">
+                            </path>
+                            <path style="fill:#54C0EB;"
+                                d="M320.8,230.8H206.4c-10.4,0-18.8-8-19.2-18c-2.8-48.8-5.6-63.2-8-110c-0.4-8.4,4.4-16,12.4-19.2 c46.4-18,97.6-18,144,0c8,3.2,12.8,10.8,12.4,19.2c-2.8,46.8-5.2,61.2-8,110C339.6,222.8,330.8,230.8,320.8,230.8z">
+                            </path>
+                        </g>
+                        <path style="fill:#FFD05B;"
+                            d="M250.8,190.8h-122c-4.4,0-8-3.6-8-8l0,0c0-4.4,3.6-8,8-8h122.4c4.4,0,8,3.6,8,8l0,0 C259.2,187.2,255.6,190.8,250.8,190.8z">
+                        </path>
+                        <g>
+                            <path style="fill:#ACB3BA;"
+                                d="M324,423.6l2,10.4c0.4,2.4,2.4,4,4.4,4h16.4c2.8,0,4.8-2.4,4.4-5.2l-2-11.2 c-0.4-3.6-3.6-6.4-7.6-6.4h-10.4C326.8,415.2,323.6,419.2,324,423.6z">
+                            </path>
+                            <path style="fill:#ACB3BA;"
+                                d="M175.6,421.2l-2,11.2c-0.4,2.8,1.6,5.2,4.4,5.2h16.4c2.4,0,4-1.6,4.4-4l1.6-10 c0.8-4.4-2.8-8.8-7.6-8.8h-10.4C179.2,415.2,176,417.6,175.6,421.2z">
+                            </path>
+                        </g>
+                    </g>
+                </svg>
+
+
+            </a>
+            <a class="navbar-item has-text-weight-bold is-size-3" href="">MySTUDENTS</a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="/">
+                    Accueil
+                </a>
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Etudiants
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <!--ajouter la classe is-selected -->
+                        <a class="navbar-item" href="/add_etudiant">
+                            Ajouter un étudiant
+                        </a>
+                        <a class="navbar-item" href="/etudiants">
+                            Lister les étudiants
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item">
+                            Aide
+                        </a>
+                    </div>
+                </div>
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Classes
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="add_classe">
+                            Ajouter une classe
+                        </a>
+                        <a class="navbar-item" href="/classes">
+                            Lister les classes
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item">
+                            Statistiques des classes
+                        </a>
+                    </div>
+                </div>
             </div>
 
-            <br>
-
-            <div>
-                <label>Prénom</label><br>
-                <input type="text" name="prenom" required>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary">
+                            <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-light">
+                            Log in
+                        </a>
+                    </div>
+                </div>
             </div>
+        </div>
+    </nav>
 
-            <br>
+    <!----------------------------->
 
-            <div>
-                <label>Âge</label><br>
-                <input type="number" name="age" min="1" required>
-            </div>
+    <main>
+        <section class="container form-container my-5">
+            <!----------------------------->
+            <section class="has-text-centered form-header">
 
-            <br>
+                <div>
+                    <svg fill="#ffffff" width="92px" height="92px" viewBox="0 0 1024 1024"
+                        xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path
+                                d="M598.528 537.6h223.631c11.311 0 20.48-9.169 20.48-20.48s-9.169-20.48-20.48-20.48H598.528c-11.311 0-20.48 9.169-20.48 20.48s9.169 20.48 20.48 20.48zM199.649 241.664H423.28c11.311 0 20.48-9.169 20.48-20.48s-9.169-20.48-20.48-20.48H199.649c-11.311 0-20.48 9.169-20.48 20.48s9.169 20.48 20.48 20.48z">
+                            </path>
+                            <path
+                                d="M593.987 418.816h285.737c16.962 0 30.72 13.758 30.72 30.72v441.006c0 16.962-13.758 30.72-30.72 30.72h-317.44c-16.968 0-30.72-13.754-30.72-30.72v-39.281c0-11.311-9.169-20.48-20.48-20.48s-20.48 9.169-20.48 20.48v39.281c0 39.586 32.089 71.68 71.68 71.68h317.44c39.583 0 71.68-32.097 71.68-71.68V449.536c0-39.583-32.097-71.68-71.68-71.68H593.987c-11.311 0-20.48 9.169-20.48 20.48s9.169 20.48 20.48 20.48z">
+                            </path>
+                            <path
+                                d="M152.747 709.12h359.086c11.311 0 20.48-9.169 20.48-20.48s-9.169-20.48-20.48-20.48H152.747c-11.311 0-20.48 9.169-20.48 20.48s9.169 20.48 20.48 20.48z">
+                            </path>
+                            <path
+                                d="M512 749.568H143.36c-16.962 0-30.72-13.758-30.72-30.72V153.6c0-16.962 13.758-30.72 30.72-30.72H460.8c16.962 0 30.72 13.758 30.72 30.72v396.8c0 11.311 9.169 20.48 20.48 20.48s20.48-9.169 20.48-20.48V153.6c0-39.583-32.097-71.68-71.68-71.68H143.36c-39.583 0-71.68 32.097-71.68 71.68v565.248c0 39.583 32.097 71.68 71.68 71.68H512c11.311 0 20.48-9.169 20.48-20.48s-9.169-20.48-20.48-20.48z">
+                            </path>
+                            <path
+                                d="M491.571 449.28v106.24c0 16.962-13.758 30.72-30.72 30.72h-229.12v40.96h229.12c39.583 0 71.68-32.097 71.68-71.68V449.28h-40.96z">
+                            </path>
+                            <path
+                                d="M112.64 702.771v-44.8c0-16.962 13.758-30.72 30.72-30.72h229.12v-40.96H143.36c-39.583 0-71.68 32.097-71.68 71.68v44.8h40.96z">
+                            </path>
+                        </g>
+                    </svg>
+                </div>
 
-            <div>
-                <label>Classe</label><br>
-                <select name="classe_id" required>
-                    <option value="">-- Choisir une classe --</option>
-                    {% for classe in classes %}
-                    <option value="{{ classe._id }}">
-                        {{ classe.nom }} ({{ classe.niveau }})
-                    </option>
-                    {% endfor %}
-                </select>
-            </div>
+                <h1 class="is-size-2">Créer un étudiant</h1>
+                <p>Remplissez les informations ci-dessous pour créer une nouvelle classe.</p>
+            </section>
+            <!---------Formulaire-------------------->
+            <section class="form-body">
 
-            <br>
+                <div>
+                    <img src="{{ url_for('static', filename='img/pexels-elkayslense-2150360500-35276904.jpg') }}"
+                        alt="student" srcset="">
+                </div>
 
-            <button type="submit">Créer l'étudiant</button>
-        </form>
+                <form method="POST" action="/add_etudiant">
+                    <div class="info-card my-5 mr-2">
+                        <p class="is-size-6">💡 Les champs marqués d'un astérisque (<span
+                                style="color: #e74c3c;">*</span>) sont
+                            obligatoires</p>
+                    </div>
+                    <div class="row">
 
-        <br>
-        <a href="/etudiants">Voir les étudiants</a>
-    </section>
+                        <div class="input-field col s12">
+                            <select id="classe_id" name="classe_id" required>
+                                <option value="">-- Choisir une classe --</option>
+                                {% for classe in classes %}
+                                <option value="{{ classe._id }}">
+                                    {{ classe.nom }} ({{ classe.niveau }})
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <label for="classe_id">Sélectionner la classe : <span class="required">*</span></label>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="input-field col s12">
+                            <label>Nom</label><br>
+                            <input type="text" name="nom" required>
+                        </div>
+
+                        <div class="input-field col s12">
+
+                            <label>Prénom</label><br>
+                            <input type="text" name="prenom" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <label for="age">Âge</label><br>
+                            <input type="number" name="age" min="1" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary m-2">Ajouter un étudiant</button>
+                </form>
+            </section>
+        </section>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Initialiser Sidenav (navigation mobile)
+                M.Sidenav.init(document.querySelectorAll('.sidenav'));
+
+                // Initialiser les Select
+                M.FormSelect.init(document.querySelectorAll('select'), {
+                    classes: '',
+                    dropdownOptions: {
+                        closeOnClick: true
+                    }
+                });
+
+                // Initialiser les Date Pickers si présents
+                var datepickers = document.querySelectorAll('.datepicker');
+                if (datepickers.length > 0) {
+                    M.Datepicker.init(datepickers, {
+                        format: 'dd/mm/yyyy',
+                        autoClose: true,
+                        i18n: {
+                            cancel: 'Annuler',
+                            clear: 'Effacer',
+                            done: 'OK',
+                            months: [
+                                'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+                                'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+                            ],
+                            monthsShort: [
+                                'Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun',
+                                'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'
+                            ],
+                            weekdays: [
+                                'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'
+                            ],
+                            weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                            weekdaysAbbrev: ['D', 'L', 'M', 'M', 'J', 'V', 'S']
+                        }
+                    });
+                }
+
+                // Fermer les messages flash
+                document.querySelectorAll('.close-message').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        this.parentElement.style.display = 'none';
+                    });
+                });
+            });
+        </script>
+
+    </main>
+
+    <!--------------------------------------------------------------------->
 </body>
 
 </html>

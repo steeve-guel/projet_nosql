@@ -5,23 +5,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bulma/css/bulma.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='materialize/css/materialize.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='materialize/js/materialize.min.js') }}">
 </head>
 
 <body>
-    <section>
-        <h1>Liste des étudiants</h1>
 
-        <ul>
-            {% for e in etudiants %}
-            <li>
-                {{ e.nom }} {{ e.prenom }} —
-                {{ e.classe[0].nom if e.classe else "Aucune classe" }}
-            </li>
-            {% endfor %}
-        </ul>
+    <header>
+        <!-- Navigation Bar -->
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 508 508" xml:space="preserve"
+                        width="64px" height="64px" fill="#000000">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <circle style="fill:#324A5E;" cx="254" cy="254" r="254"></circle>
+                            <path style="fill:#2B3B4E;"
+                                d="M78,436.8c45.6,44,107.6,71.2,176,71.2s130.4-27.2,176-71.2H78z">
+                            </path>
+                            <g>
+                                <rect x="300" y="210.4" style="fill:#FFFFFF;" width="8.4" height="78.8"></rect>
+                                <rect x="218.8" y="210.4" style="fill:#FFFFFF;" width="8.4" height="78.8"></rect>
+                            </g>
+                            <g>
+                                <rect x="300" y="210.4" style="fill:#E6E9EE;" width="8.4" height="29.6"></rect>
+                                <rect x="218.8" y="210.4" style="fill:#E6E9EE;" width="8.4" height="29.6"></rect>
+                            </g>
+                            <path style="fill:#FFFFFF;"
+                                d="M148.8,262v-79.2h-8.4V262c0,17.2,14,31.6,31.6,31.6h25.6v-8.4H172 C159.2,284.8,148.8,274.8,148.8,262z">
+                            </path>
+                            <rect x="140.8" y="182.8" style="fill:#E6E9EE;" width="8.4" height="15.6"></rect>
+                            <g>
+                                <polygon style="fill:#FFFFFF;" points="348,432.4 325.6,293.2 310.8,293.2 333.6,432.4 ">
+                                </polygon>
+                                <polygon style="fill:#FFFFFF;" points="194,432.4 216.4,293.2 202,293.2 179.2,432.4 ">
+                                </polygon>
+                            </g>
+                            <g>
+                                <polygon style="fill:#E6E9EE;"
+                                    points="328.8,313.6 325.6,293.2 310.8,293.2 314.4,313.6 ">
+                                </polygon>
+                                <polygon style="fill:#E6E9EE;" points="213.2,313.6 216.4,293.2 202,293.2 198.4,313.6 ">
+                                </polygon>
+                            </g>
+                            <g>
+                                <path style="fill:#54C0EB;"
+                                    d="M351.2,302.8H176c-2.8,0-5.2-2.4-5.2-5.2v-16.4c0-2.8,2.4-5.2,5.2-5.2h174.8c2.8,0,5.2,2.4,5.2,5.2 v16.4C356.4,300.4,354,302.8,351.2,302.8z">
+                                </path>
+                                <path style="fill:#54C0EB;"
+                                    d="M320.8,230.8H206.4c-10.4,0-18.8-8-19.2-18c-2.8-48.8-5.6-63.2-8-110c-0.4-8.4,4.4-16,12.4-19.2 c46.4-18,97.6-18,144,0c8,3.2,12.8,10.8,12.4,19.2c-2.8,46.8-5.2,61.2-8,110C339.6,222.8,330.8,230.8,320.8,230.8z">
+                                </path>
+                            </g>
+                            <path style="fill:#FFD05B;"
+                                d="M250.8,190.8h-122c-4.4,0-8-3.6-8-8l0,0c0-4.4,3.6-8,8-8h122.4c4.4,0,8,3.6,8,8l0,0 C259.2,187.2,255.6,190.8,250.8,190.8z">
+                            </path>
+                            <g>
+                                <path style="fill:#ACB3BA;"
+                                    d="M324,423.6l2,10.4c0.4,2.4,2.4,4,4.4,4h16.4c2.8,0,4.8-2.4,4.4-5.2l-2-11.2 c-0.4-3.6-3.6-6.4-7.6-6.4h-10.4C326.8,415.2,323.6,419.2,324,423.6z">
+                                </path>
+                                <path style="fill:#ACB3BA;"
+                                    d="M175.6,421.2l-2,11.2c-0.4,2.8,1.6,5.2,4.4,5.2h16.4c2.4,0,4-1.6,4.4-4l1.6-10 c0.8-4.4-2.8-8.8-7.6-8.8h-10.4C179.2,415.2,176,417.6,175.6,421.2z">
+                                </path>
+                            </g>
+                        </g>
+                    </svg>
 
-        <a href="/add_etudiant">Ajouter un étudiant</a>
-    </section>
+
+                </a>
+                <a class="navbar-item has-text-weight-bold is-size-3" href="">MySTUDENTS</a>
+
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                    data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="/">
+                        Accueil
+                    </a>
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Etudiants
+                        </a>
+
+                        <div class="navbar-dropdown">
+                            <!--ajouter la classe is-selected -->
+                            <a class="navbar-item" href="/add_etudiant">
+                                Ajouter un étudiant
+                            </a>
+                            <a class="navbar-item" href="/etudiants">
+                                Lister les étudiants
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item">
+                                Aide
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Classes
+                        </a>
+
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="add_classe">
+                                Ajouter une classe
+                            </a>
+                            <a class="navbar-item" href="/classes">
+                                Lister les classes
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item">
+                                Statistiques des classes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a class="button is-primary">
+                                <strong>Sign up</strong>
+                            </a>
+                            <a class="button is-light">
+                                Log in
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!----------------------------->
+    </header>
+
+    <main class="container">
+        <div class="has-text-centered">
+            <h1>Liste des étudiants</h1>
+            <p>Consulter la liste des étudiants inscrits dans le système.</p>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Age</th>
+                    <th>Classe</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for e in etudiants %}
+                <tr>
+                    <td>{{ e.nom }}</td>
+                    <td>{{ e.prenom }}</td>
+                    <td>{{ e.age }}</td>
+                    <td class="is-info">{{ e.classe[0].nom if e.classe else "Aucune classe" }}</td>
+                    <td> <a href="">Voir</a> | <a href="/etudiants/{{ e._id }}">Modifier</a> | <a
+                            href="/etudiants/{{ e._id }}/delete">Supprimer</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
 </body>
 
 </html>
