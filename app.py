@@ -169,6 +169,8 @@ def edit_etudiant(etudiant_id):
 
     classes = list(db.classes.find())
 
+    print('hello')
+
     if request.method == 'POST':
         nom = request.form.get('nom')
         prenom = request.form.get('prenom')

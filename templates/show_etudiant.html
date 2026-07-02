@@ -151,12 +151,34 @@
     </header>
 
     <main>
-        <h1>Détails de l'étudiant</h1>
-        <p><strong>Nom:</strong> {{ etudiant.nom }}</p>
-        <p><strong>Prénom:</strong> {{ etudiant.prenom }}</p>
-        <p><strong>Âge:</strong> {{ etudiant.age }} ans</p>
-        <p><strong>Classe:</strong> {{ etudiant.classe[0].nom if etudiant.classe else "Aucune classe" }}</p>
-        <a href="/etudiants">Retour à la liste des étudiants</a>
+
+        <section class="container">
+            <section class="has-text-centered">
+                <h4>Détails de l'étudiant</h4>
+                <small>Consulter les information disponibles sur l'etudiants : {{etudiant.nom}}</small>
+            </section>
+            
+            {% set initiales = etudiant.nom[0] + etudiant.prenom[0] %}
+            <div class="student-card">
+                <div class="student-content">
+                    <div>
+                        <p class="student-photo-profil">{{ initiales }}</p>
+                    </div>
+
+                    <div class="student-info">
+                        <h3 class="student-name">{{etudiant.nom}} {{etudiant.prenom}}</h3>
+                        <p class="student-class-badge">Classe: {{etudiant.classe[0].nom if etudiant.classe else "Aucune classe"}}
+                        </p>
+                        <p class="student-age">Âge: {{etudiant.age}} ans</p>
+                    </div>
+
+                    <div class="student-action">
+                        <a href="/etudiants/{{ etudiant._id }}/edit" class="btn-edit p-2">Modifier</a>
+                        <a href="/etudiants/{{ etudiant._id }}/delete" class="btn-delete p-2">Supprimer</a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 </body>
 
